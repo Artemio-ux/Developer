@@ -1,0 +1,107 @@
+
+#include<stdio.h>
+#include<stdlib.h>
+
+void llenar (int,int R[]);
+void imprimir (int,int R[]);
+
+float CalcularRTP (int,int R[]);
+int CalcularRTS (int,int R[]);
+
+
+
+int main (){
+	
+	int nr;
+	int R[100] ;
+	int opcion ; // opcion del switch 
+	
+	printf("DIGITA EL NUMERO DE RESISTENCIAS: ");
+	scanf("%i",&nr);
+	
+	
+	llenar (nr,R);
+	imprimir (nr,R);
+	
+   
+    // aqui inicia mi switch 
+    do {
+    	
+	
+ 	printf("\n\nMENU");
+	printf("\n1.- RTS\n");
+	printf("2.- RTP\n");
+	printf("3.- AMBAS\n");
+	printf("4.- SALIR\n");
+	printf("OPCION : "); scanf("%d",&opcion);
+	
+	switch(opcion) {
+		case 1 :
+				printf("\nRTS= %i ohms",CalcularRTS(nr ,R));
+			break;
+		case 2:
+			printf("\nRTP= %f ohms",CalcularRTP(nr ,R));
+			break ;
+		case 3:
+			printf("\nRTS= %i ohms",CalcularRTS(nr ,R));
+			printf("\nRTP= %f ohms",CalcularRTP(nr ,R));
+			break ;
+			
+		case 4: 
+		break ;
+
+}
+if (opcion<= 0 || opcion >4){
+	printf("\nDIGITE UNA OPCION DEL MENU\n\n");
+}
+
+}while (opcion<= 0 || opcion >4);
+
+	
+	
+	printf("\n\n");
+	system("pause");
+	return 0;
+}
+
+
+
+
+
+
+void llenar (int nr ,int R[100]){
+	printf("\n\n----RESISTENCIAS---\n");	
+	for (int i=0;i<nr;i++){
+		printf("R%i: ",i+1);
+		scanf("%i",&R[i]);
+	}
+}
+
+
+void imprimir (int nr,int R[100]){
+	printf("\n\n---LAS RESISTENCIAS INGRESADAS FUERON---");
+	for (int i=0;i<nr;i++){
+		printf("\nR%i= %i ohms",i+1,R[i]);
+	}
+}
+
+
+float CalcularRTP (int nr,int R[100]){
+	float RTP=0;
+	for (int i=0;i<nr;i++){
+		
+		RTP += 1.0/R[i] ;
+		}
+	RTP= 1.0/RTP ;
+	return RTP;
+}
+
+
+int  CalcularRTS (int nr ,int R[100]){
+	int RTS=0; // variable donde guardo la suma de mis resistencias en serie 
+	for (int i=0;i<nr;i++){
+		 
+		 RTS += R[i];   
+	}
+	return RTS ;
+}
